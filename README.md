@@ -52,4 +52,4 @@ Additionally, make sure you have Go 1.20 or later installed.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Corresponding code is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
