@@ -66,7 +66,7 @@ func CreateTeam(orgName, teamSlug, mainMaintainer, deputyMaintainer string) erro
 }
 
 // Creates a GitHub team and assigns it to an external group
-func CreateTeamExternalGroup(orgName, teamSlug, externalGroupName string) error {
+func CreateTeamWithExternalGroup(orgName, teamSlug, externalGroupName string) error {
 	// Create the GitHub team using the `gh api` command
 	createTeamCommand := exec.Command("gh", "api", "-X", "POST", "-H", "Accept: application/vnd.github+json", "-H", "X-GitHub-Api-Version: 2022-11-28", "orgs/"+orgName+"/teams", "-f", "name="+teamSlug, "-f", "notification_setting=notifications_enabled", "-f", "privacy=closed")
 	output, err := createTeamCommand.CombinedOutput()
