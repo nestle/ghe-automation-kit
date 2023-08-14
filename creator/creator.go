@@ -14,7 +14,9 @@ func CreateRepository(repoName, orgName, repoVisibility string) error {
 	cmd := exec.Command("gh", "repo", "create", orgName+"/"+repoName, "--"+repoVisibility)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("failed to create repository: %w, Output: %s", err, string(output))
+		// Print the error message to the runner console
+		fmt.Fprintf(os.Stderr, "error creating GitHub repository: %v\n%s", err, string(output))
+		return err // Return the error to handle in the caller function
 	}
 	return nil
 }
