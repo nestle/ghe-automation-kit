@@ -9,9 +9,21 @@ import (
 	"github.com/nestle/ghe-automation-kit/remover"
 )
 
-// Creates a new repository using GitHub CLI
+// Creates a new GitHub repository
 func CreateRepository(repoName, orgName, repoVisibility string) error {
 	cmd := exec.Command("gh", "repo", "create", orgName+"/"+repoName, "--"+repoVisibility)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		// Print the error message to the runner console
+		fmt.Fprintf(os.Stderr, "error creating GitHub repository: %v\n%s", err, string(output))
+		return err // Return the error to handle in the caller function
+	}
+	return nil
+}
+
+// Creates a new GitHub repository based on template
+func CreateRepositoryBasedOnTemplate(repoName, orgName, repoVisibility, templateRepo string) error {
+	cmd := exec.Command("gh", "repo", "create", orgName+"/"+repoName, "--"+repoVisibility, "--template"+templateRepo)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		// Print the error message to the runner console
