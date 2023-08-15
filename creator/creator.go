@@ -23,7 +23,7 @@ func CreateRepository(repoName, orgName, repoVisibility string) error {
 
 // Creates a new GitHub repository based on template
 func CreateRepositoryBasedOnTemplate(repoName, orgName, repoVisibility, templateRepo string) error {
-	cmd := exec.Command("gh", "repo", "create", orgName+"/"+repoName, "--"+repoVisibility, "--template"+templateRepo)
+	cmd := exec.Command("gh", "repo", "create", orgName+"/"+repoName, "--"+repoVisibility, "--template "+templateRepo)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		// Print the error message to the runner console
